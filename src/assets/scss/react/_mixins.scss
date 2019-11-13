@@ -1,0 +1,19 @@
+button:focus, :focus {
+  outline: none;
+}
+.error{
+  color:red
+}
+
+.success{
+  color: green;
+  font-family: helvetica;
+  padding-top: 3%;
+}
+.CrudLayout   h2{
+  padding-bottom: 2%;
+}
+
+.CrudLayout{
+  padding:4%
+}
