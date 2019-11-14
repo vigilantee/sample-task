@@ -3,7 +3,6 @@ import React from "react";
 import {
     Card,
     CardHeader,
-    Media,
     Table,
     Input,
     Col,
@@ -14,6 +13,7 @@ import {
     FormGroup,
 } from "reactstrap";
 import _ from 'lodash';
+import RenderBlade from './Renderblade';
 
 class TableContent extends React.Component {
     constructor(props) {
@@ -48,38 +48,22 @@ class TableContent extends React.Component {
         );
     }
 
-
-    renderBlade = (tupple, index) => {
-        const keys = Object.keys(tupple);
-        // console.log(this.props.route,'stre ')
+    renderLabel = (label = "label", htmlFor = `exampleFormControlInput1`, className = `form-control-label`) => {
         return (
-            <tr key={index}>
-                {keys.map((el, i) =>
-                    (
-                        <th scope="row"
-                            key={i}
-                            style={{ backgroundColor: tupple.status }}
-                        // style={{ backgroundColor: ['red','yellow'].includes(tupple.status.toLowerCase())?tupple.status:'green' }}
-                        >
-                            {
-                                (el === `status`)
-                                    ?
-                                    <Media className="align-items-center">
-                                        <Input type="select">
-                                            <option value={tupple[el]} >{tupple[el]}</option>
-                                        </Input>
-                                    </Media>
-                                    :
-                                    <Media className="align-items-center">
-                                        <span className="name mb-0 text-sm">{(typeof tupple[el] === 'object') ? "Object" : tupple[el]}</span>
-                                    </Media>
-                            }
-                        </th>
-                    )
-                )}
-            </tr>
-
+            <label
+                className={className}
+                htmlFor={htmlFor}
+            >
+                {label}
+            </label>
         );
+    }
+
+
+    editTaskName = (metaTaskName) => {
+        this.setState({
+            metaTaskName
+        })
     }
 
     searchTable(value) {
@@ -135,7 +119,7 @@ class TableContent extends React.Component {
                             {
                                 tableData.length ?
                                     <tbody key={tableData.length} className="list">
-                                        {tableData.map((tupple, index) => this.renderBlade(tupple, index + 1))}
+                                        {tableData.map((tupple, index) => <RenderBlade tupple={tupple} index={index+1}/>)}
                                     </tbody>
                                     :
                                     <p style={{ textAlign: 'center' }}>
